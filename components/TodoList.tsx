@@ -17,6 +17,7 @@ export default function TodoList({ session }: { session: Session }) {
       const { data: todos, error } = await supabase
         .from('todos')
         .select('*')
+        .eq('user_id', user.id)
         .order('id', { ascending: true })
 
       if (error) console.log('error', error)
