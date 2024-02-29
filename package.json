@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "dev": "concurrently \"npm run dev:css\" \"next dev\"",
+    "dev": "concurrently \"npm run dev:css\" \"next dev -p 80\"",
     "dev:css": "tailwindcss -w -i ./styles/tailwind.css -o styles/app.css",
     "build": "next build",
     "build:css": "tailwindcss -m -i ./styles/tailwind.css -o styles/app.css",
-    "start": "next start",
+    "start": "next start -p 80",
     "lint": "next lint"
   },
   "dependencies": {
