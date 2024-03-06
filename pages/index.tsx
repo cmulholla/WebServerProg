@@ -7,6 +7,8 @@ import {
   } from '@supabase/auth-ui-shared'
 import TodoList from '@/components/TodoList'
 
+// cd /mnt/c/Users/cmulholla/Desktop/Programming/bun/SP2/Supabase-Next-Ex/
+
 export default function Home() {
   const session = useSession()
   const supabase = useSupabaseClient()
@@ -37,6 +39,9 @@ export default function Home() {
             style={{ minWidth: 250, maxWidth: 600, margin: 'auto' }}
           >
             <TodoList session={session} />
+            <div
+              className="absolute inset-x-0 bottom-0"
+            >
             <button
               className="btn-black w-full mt-12"
               onClick={async () => {
@@ -46,6 +51,7 @@ export default function Home() {
             >
               Logout
             </button>
+            </div>
           </div>
         )}
       </div>
