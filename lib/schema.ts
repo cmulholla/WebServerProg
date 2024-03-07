@@ -32,6 +32,29 @@ export interface Database {
           user_id?: string
         }
       }
+      UserData: {
+        Row: {
+          email: string | null
+          username: string | null
+          skills: string | null
+          talents: string | null
+          description: string | null
+        }
+        Insert: {
+          email: string | null
+          username: string | null
+          skills: string | null
+          talents: string | null
+          description: string | null
+        }
+        Update: {
+          email?: string | null
+          username?: string | null
+          skills?: string | null
+          talents?: string | null
+          description?: string | null
+        }
+      }
     }
     Views: {
       [_ in never]: never
