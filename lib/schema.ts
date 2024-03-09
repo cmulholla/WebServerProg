@@ -55,6 +55,34 @@ export interface Database {
           description?: string | null
         }
       }
+      boards: {
+        Row: {
+          id: number
+          name: string
+        }
+        Insert: {
+          id?: number
+          name: string
+        }
+        Update: {
+          id?: number
+          name?: string
+        }
+      }
+      board_members: {
+        Row: {
+          board_id: number
+          user_id: string | undefined
+        }
+        Insert: {
+          board_id: number
+          user_id: string | undefined
+        }
+        Update: {
+          board_id?: number
+          user_id?: string | undefined
+        }
+      }
     }
     Views: {
       [_ in never]: never
