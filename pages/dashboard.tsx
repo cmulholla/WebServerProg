@@ -21,30 +21,40 @@ type Board = Database['public']['Tables']['boards']['Row']
 type BoardMember = Database['public']['Tables']['board_members']['Row']
 
 export default function Dashboard() {
-  const session = useSession()
-  const supabase = useSupabaseClient<Database>()
-  const [boards, setBoards] = useState<Board[]>([])
-  const [board_members, setBoardMembers] = useState<BoardMember[]>([])
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const [errorText, setErrorText] = useState('')
-  const [newBoardText, setNewBoardText] = useState('')
-    
+    const session = useSession()
+    const supabase = useSupabaseClient<Database>()
+    const [boards, setBoards] = useState<Board[]>([])
+    const [board_members, setBoardMembers] = useState<BoardMember[]>([])
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [errorText, setErrorText] = useState('')
 
-  const user = session?.user
+    const user = session?.user
 
     useEffect(() => {
         const fetchBoards = async () => {
-        const { data: boards, error } = await supabase
-            .from('boards')
-            .select('*')
-            .order('id', { ascending: true })
-    
-        if (error) console.log('error', error)
-        else setBoards(boards)
+            const { data: boards, error } = await supabase
+                .from('boards')
+                .select('*')
+                .order('id', { ascending: true })
+        
+            if (error) console.log('error', error)
+            else setBoards(boards)
+        }
+
+        const fetchBoardMembers = async () => {
+            const { data: board_members, error } = await supabase
+                .from('board_members')
+                .select('*')
+                .eq('user_id', user?.id)
+                .order('board_id', { ascending: true })
+
+            if (error) console.log('error', error)
+            else setBoardMembers(board_members)
         }
     
         fetchBoards()
-    }, [supabase])
+        fetchBoardMembers()
+    }, [supabase, session, user]);
 
     const joinBoard = async (boardId: number) => {
         const { data: board_member, error } = await supabase
@@ -82,12 +92,16 @@ export default function Dashboard() {
                 setErrorText(error.message)
             } else {
                 setBoards([...boards, board])
-                setNewBoardText('')
             }
         }
     }
 
+    const viewBoard = (boardId: number) => {
+        window.location.href = `/board/${boardId}`
+    }
+
     const onSubmit = (data: any) => createBoard(data.Board);
+    const onJoin = (data: any) => joinBoard(data.Board);
     console.log(errors);
 
     return (
@@ -105,7 +119,7 @@ export default function Dashboard() {
                     style={{ minWidth: 250, maxWidth: 600, margin: 'auto' }}
                 >
                     <form
-                        onSubmit={handleSubmit(onSubmit)}
+                        onSubmit={onJoin}
                         className="flex gap-2 my-2"
                     >
                         <input
@@ -130,8 +144,6 @@ export default function Dashboard() {
                             placeholder="Enter a new board name"
                             {...register("Board", { required: true })}
                             className="p-2 border-2 border-gray-400 rounded-lg"
-                            value={newBoardText}
-                            onChange={(e) => setNewBoardText(e.target.value)}
                         />
                         <button
                             type="submit"
@@ -140,26 +152,27 @@ export default function Dashboard() {
                             Create Board
                         </button>
                     </form>
-                    {boards.map((board) => (
-                        <div key={board.id} className="flex gap-2 my-2">
-                            <div>{board.name}</div>
-                            {board_members.includes({board_id: board.id, user_id: session?.user.id}) ? (
-                                <button
-                                    onClick={() => leaveBoard(board.id)}
-                                    className="p-2 bg-red-500 text-white rounded-lg"
-                                >
-                                    Leave Board
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={() => joinBoard(board.id)}
-                                    className="p-2 bg-green-500 text-white rounded-lg"
-                                >
-                                    View Board
-                                </button>
-                            )}
-                        </div>
-                    ))}
+                    {boards.map((board) => {
+                        if (board_members.includes({board_id: board.id, user_id: session?.user.id})) {
+                            return (
+                                <div key={board.id} className="flex gap-2 my-2">
+                                    <div>{board.name}</div>
+                                    <button
+                                        onClick={() => viewBoard(board.id)}
+                                        className="p-2 bg-blue-500 text-white rounded-lg"
+                                    >
+                                        View Board
+                                    </button>
+                                    <button
+                                        onClick={() => leaveBoard(board.id)}
+                                        className="p-2 bg-red-500 text-white rounded-lg"
+                                    >
+                                        Leave Board
+                                    </button>
+                                </div>
+                            );
+                        }
+                        })}
                 </div>
             </div>
         </>

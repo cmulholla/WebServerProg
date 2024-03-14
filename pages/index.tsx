@@ -38,7 +38,12 @@ export default function Home() {
             className="w-full h-full flex flex-col justify-center items-center p-4"
             style={{ minWidth: 250, maxWidth: 600, margin: 'auto' }}
           >
-            <TodoList session={session} />
+            {
+              /* send the user to the dashboard if they are logged in 
+              <TodoList session={session} />
+              */
+              window.location.href = `/dashboard`
+            }
           </div>
         )}
       </div>
