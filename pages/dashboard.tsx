@@ -67,10 +67,13 @@ export default function Dashboard() {
         fetchBoardMembers()
     }, [supabase, session, user]);
 
-    const joinBoard = async (boardId: number) => {
+    const joinBoard = async (boardId: string) => {
+        console.log('boardId', boardId)
+        console.log('user', user?.id)
+
         const { data: board_member, error } = await supabase
             .from('board_members')
-            .insert({ board_id: boardId, user_id: user?.id })
+            .insert({ board_id: parseInt(boardId), user_id: user?.id })
             .select()
             .single()
     
@@ -78,7 +81,7 @@ export default function Dashboard() {
             setErrorText(error.message)
         } else {
             setBoardMembers([...board_members, board_member])
-            window.location.href = `/board/${boardId}`
+            //window.location.href = `/board/${boardId}`
         }
     }
 
@@ -153,13 +156,19 @@ export default function Dashboard() {
                     style={{ minWidth: 250, maxWidth: 600, margin: 'auto' }}
                 >
                     <form
-                        onSubmit={onJoin}
+                        onSubmit={handleSubmit((data: any) => {
+                            if (event == null) {
+                                return;
+                            }
+                            event.preventDefault();
+                            onJoin(data);
+                        })}
                         className="flex gap-2 my-2"
                     >
                         <input
                             type="text"
                             placeholder="Enter a board ID"
-                            {...register("JoinBoard", { required: false })}
+                            {...register("JoinBoard", { required: false, valueAsNumber: true})}
                             className="p-2 border-2 border-gray-400 rounded-lg"
                         />
                         <button
@@ -188,7 +197,6 @@ export default function Dashboard() {
                     </form>
                     {boards.map((board) => {
                         if (board_members.some(b => b.board_id === board.id && b.user_id === session?.user.id)) {
-                            console.log('boardID', board.id)
                             return (
                                 <div key={board.id} className="flex gap-2 my-2">
                                     <div>{board.name}</div>
