@@ -67,6 +67,7 @@ export default function Dashboard() {
             setErrorText(error.message)
         } else {
             setBoardMembers([...board_members, board_member])
+            window.location.href = `/board/${boardId}`
         }
     }
 
@@ -82,6 +83,7 @@ export default function Dashboard() {
     const createBoard = async (boardText: string) => {
         let boardName = boardText.trim()
         if (boardName.length) {
+            // create the board in the boards db
             const { data: board, error } = await supabase
                 .from('boards')
                 .insert({ name: boardName })
@@ -93,8 +95,27 @@ export default function Dashboard() {
             } else {
                 setBoards([...boards, board])
             }
+
+            if (board == null) {
+                console.log('board is null')
+                return;
+            }
+            else {
+                console.log('boardid', board.id)
+            }
+
+            // add the user to the board in the board_members db
+            const { data: board_member, error: errorBoardMember } = await supabase
+                .from('board_members')
+                .insert({ board_id: board.id, user_id: user?.id })
+                .select()
+                .single()
         }
     }
+
+    // login with signup goes to first time page
+    // on board creation, it incorrectly redirs you
+    // on board creation, it does not assign you to the board
 
     const viewBoard = (boardId: number) => {
         window.location.href = `/board/${boardId}`
@@ -172,7 +193,7 @@ export default function Dashboard() {
                                 </div>
                             );
                         }
-                        })}
+                    })}
                 </div>
             </div>
         </>

@@ -28,6 +28,7 @@ yarn-error.log*
 # local env files - commenting for private use
 ##.env*.local
 /supabase/config.toml
+package.json
 
 # vercel
 .vercel
