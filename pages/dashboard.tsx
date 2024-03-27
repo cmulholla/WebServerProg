@@ -42,14 +42,25 @@ export default function Dashboard() {
         }
 
         const fetchBoardMembers = async () => {
+
+            if (user == null) {
+                console.log('user is null')
+                return;
+            }
+
             const { data: board_members, error } = await supabase
                 .from('board_members')
                 .select('*')
-                .eq('user_id', user?.id)
+                .eq('user_id', user.id)
                 .order('board_id', { ascending: true })
+            
+            if (board_members == null) {
+                console.log('board members is null')
+                return;
+            }
 
             if (error) console.log('error', error)
-            else setBoardMembers(board_members)
+            else setBoardMembers(board_members);
         }
     
         fetchBoards()
@@ -110,6 +121,8 @@ export default function Dashboard() {
                 .insert({ board_id: board.id, user_id: user?.id })
                 .select()
                 .single()
+            
+            window.location.href = `/board/${board.id}`
         }
     }
 
@@ -121,8 +134,8 @@ export default function Dashboard() {
         window.location.href = `/board/${boardId}`
     }
 
-    const onSubmit = (data: any) => createBoard(data.Board);
-    const onJoin = (data: any) => joinBoard(data.Board);
+    const onSubmit = (data: any) => createBoard(data.CreateBoard);
+    const onJoin = (data: any) => joinBoard(data.JoinBoard);
     console.log(errors);
 
     return (
@@ -146,7 +159,7 @@ export default function Dashboard() {
                         <input
                             type="text"
                             placeholder="Enter a board ID"
-                            {...register("Board", { required: true })}
+                            {...register("JoinBoard", { required: false })}
                             className="p-2 border-2 border-gray-400 rounded-lg"
                         />
                         <button
@@ -163,7 +176,7 @@ export default function Dashboard() {
                         <input
                             type="text"
                             placeholder="Enter a new board name"
-                            {...register("Board", { required: true })}
+                            {...register("CreateBoard", { required: false })}
                             className="p-2 border-2 border-gray-400 rounded-lg"
                         />
                         <button
@@ -174,7 +187,8 @@ export default function Dashboard() {
                         </button>
                     </form>
                     {boards.map((board) => {
-                        if (board_members.includes({board_id: board.id, user_id: session?.user.id})) {
+                        if (board_members.some(b => b.board_id === board.id && b.user_id === session?.user.id)) {
+                            console.log('boardID', board.id)
                             return (
                                 <div key={board.id} className="flex gap-2 my-2">
                                     <div>{board.name}</div>
