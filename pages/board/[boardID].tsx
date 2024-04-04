@@ -133,15 +133,13 @@ export default function BoardPage() {
         <Grid item xs={6} >
           <h1 style={{ paddingLeft: '10%'}}>{board.name}</h1>
         </Grid>
-        <Grid item xs={6}>
-          <p style={{ textAlign: 'right', paddingRight: '10%'}}>
-            <h2>Board Members</h2>
-            <ul>
-              {board_users.map((user) => (
-                <li>{user.username}</li>
-              ))}
-            </ul>
-          </p>
+        <Grid item xs={6} style={{ textAlign: 'right', paddingRight: '10%'}}>
+          <h2>Board Members</h2>
+          <ul>
+            {board_users.map((user) => (
+              <li>{user.username}</li>
+            ))}
+          </ul>
         </Grid>
         <Grid item xs={3}>
           <Paper sx={{ p: 2, bgcolor: 'rgba(0, 0, 0, 0.1)', border: '1px solid rgba(0, 0, 0, 0.2)', height: '100%' }}>
