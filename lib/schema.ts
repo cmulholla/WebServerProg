@@ -39,13 +39,15 @@ export interface Database {
           skills: string | null
           talents: string | null
           description: string | null
+          user_id: string
         }
         Insert: {
-          email: string | null
-          username: string | null
-          skills: string | null
-          talents: string | null
-          description: string | null
+          email?: string | null
+          username?: string | null
+          skills?: string | null
+          talents?: string | null
+          description?: string | null
+          user_id: string
         }
         Update: {
           email?: string | null
@@ -53,6 +55,7 @@ export interface Database {
           skills?: string | null
           talents?: string | null
           description?: string | null
+          user_id?: string
         }
       }
       boards: {
@@ -81,6 +84,32 @@ export interface Database {
         Update: {
           board_id?: number
           user_id?: string | undefined
+        }
+      }
+      board_ticket_data: {
+        Row: {
+          board_id: number
+          ticket_id: number
+          title: string
+          description: string
+          assignee_id: string
+          status_column: string
+        }
+        Insert: {
+          board_id: number
+          ticket_id: number
+          title: string
+          description: string
+          assignee_id: string
+          status_column: string
+        }
+        Update: {
+          board_id?: number
+          ticket_id?: number
+          title?: string
+          description?: string
+          assignee_id?: string
+          status_column?: string
         }
       }
     }
