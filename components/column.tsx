@@ -10,6 +10,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 
 // This file will be used in the board page to display the columns
 // This column component will include:
@@ -42,7 +43,7 @@ export default function Column({ boardId, columnName, session, supabase, board_m
                 .from('board_ticket_data')
                 .select('*')
                 .eq('board_id', boardId)
-                .eq('column_name', columnName)
+                .eq('status_column', columnName)
                 .order('ticket_id', { ascending: true })
             
             if (error) console.log('error', error)
@@ -55,7 +56,21 @@ export default function Column({ boardId, columnName, session, supabase, board_m
   
   return (
     <div>
-      <h2>{columnName}</h2>
+      <Stack direction="row" spacing={1} justifyContent="space-between">
+        <h6>{columnName + " "}</h6>
+        {columnName === 'To Do' ? (
+          <Button variant="outlined" color="primary" size="small" style={{position: 'relative', top: '-5px', visibility: user ? 'visible' : 'hidden'}}
+                  onClick={() => router.push(`/board/${boardId}/add-task`)}>
+            Add Task
+          </Button>
+        ) : (
+          <Button variant="outlined" color="primary" size="small" style={{position: 'relative', top: '-5px', visibility: 'hidden'}}
+                  onClick={() => router.push(`/board/${boardId}/add-task`)}>
+            Add Task
+          </Button>
+        )}
+      </Stack>
+      <hr />
       <Stack spacing={2}>
         <Box sx={{ flexGrow: 1 }}>
           <Paper>
