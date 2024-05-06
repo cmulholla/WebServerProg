@@ -28,7 +28,7 @@ export default function Home() {
           <div className="min-w-full min-h-screen flex items-center justify-center">
             <div className="w-full h-full flex justify-center items-center p-4">
               <div className="w-full h-full sm:h-auto sm:w-2/5 max-w-sm p-5 bg-white shadow flex flex-col text-base">
-                This amazing website is powered by Supabase, ReactJS, NextJS, TailwindCSS, Bun, AWS, and Mistral.
+                This amazing website is powered by Supabase, ReactJS, NextJS, TailwindCSS, Bun, AWS, and OpenAI.
                 Sign up or log in to get started!
               </div>
             </div>

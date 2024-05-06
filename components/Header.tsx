@@ -75,12 +75,9 @@ function Header({ session, supabase, boardName = "", board_id = 0, board_members
       <Navbar.Brand className="d-flex align-items-start" style={{ width: '33vw', justifyContent: 'flex-start', paddingLeft: '1.5%' }}>
         <Stack direction="row" spacing={1}>
           <a href={`/board/${board_id}`} style={{textDecoration: 'none', color: 'white'}}>{boardName}</a>
-          {board_members.map((user) => (
-            <Avatar {...stringAvatar(user.username)} />
-          ))}
         </Stack>
       </Navbar.Brand>
-      <Navbar.Brand href="/" style={{ width: '33vw', textAlign: 'center' }}><b>Scrum AI</b></Navbar.Brand>
+      <Navbar.Brand href="/" style={{ width: '33vw', textAlign: 'center' }}><b>Lang AI</b></Navbar.Brand>
       <Nav className="d-flex align-items-end" style={{ width: '33vw', justifyContent: 'flex-end', paddingRight: '1.5%' }}>
         {session ? (
           <>

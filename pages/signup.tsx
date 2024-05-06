@@ -32,7 +32,7 @@ export default function Signup() {
       console.log('User has some data, updating...')
       const { data: any, error } = await supabase
         .from('UserData')
-        .update({ username: data.Username, skills: data['Skills (list)'], talents: data['Other talents'], user_id: session?.user.id})
+        .update({ username: data.Username, user_id: session?.user.id})
         .eq('email', session?.user.email)
         .single()
 
@@ -49,7 +49,7 @@ export default function Signup() {
       console.log('User has no data, creating...')
       const { data: any, error } = await supabase
         .from('UserData')
-        .insert({ email: session?.user.email, username: data.Username, skills: data['Skills (list)'], talents: data['Other talents'], user_id: session?.user.id})
+        .insert({ email: session?.user.email, username: data.Username, user_id: session?.user.id})
         .select()
         .single()
 
@@ -89,13 +89,11 @@ export default function Signup() {
           <div style={{ flex: 1, paddingRight: '1rem', borderRight: '1px solid #ddd', paddingTop: '1rem', height: '100vh' }}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input type="text" placeholder="Username" {...register("Username", {required: true})} />
-              <input type="text" placeholder="Skills (list)" {...register("Skills (list)", {})} />
-              <input type="text" placeholder="Other talents" {...register("Other talents", {})} />
               <input type="submit" />
             </form>
           </div>
           <div style={{ flex: 1, paddingLeft: '1rem', paddingTop: "1rem" }}>
-            <p style={{ backgroundColor: '#f0f0f0', padding: '1rem', borderRadius: '5px' }}>Mistral AI text goes here</p>
+            <p style={{ backgroundColor: '#f0f0f0', padding: '1rem', borderRadius: '5px' }}></p>
           </div>
         </div>
       ) : (

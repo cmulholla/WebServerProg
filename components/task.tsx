@@ -20,6 +20,7 @@ type TaskProps = {
   session: any;
   supabase: any;
   board_members: Database['public']['Tables']['UserData']['Row'][];
+  column: string;
 };
 
 // function to find a user by user_id
@@ -27,7 +28,7 @@ function findUserById(user_id: string, board_members: Database['public']['Tables
   return board_members.find((user) => user.user_id === user_id)?.username || 'Unassigned';
 }
 
-export default function Task({ task, session, supabase, board_members }: TaskProps) {
+export default function Task({ task, session, supabase, board_members, column }: TaskProps ) {
   const router = useRouter();
   const user = session?.user
 
@@ -48,14 +49,24 @@ export default function Task({ task, session, supabase, board_members }: TaskPro
   }
 
   return (
-    <div onClick={handleDivClick} style={{ border: '1px solid black', padding: '10px', margin: '10px', cursor: 'pointer' }}>
-      <h3>{task.title}</h3>
-      <p>{findUserById(task.assignee_id, board_members)}</p>
-      {session ? (
-        <button onClick={handleDelete} className="p-2 bg-red-500 text-white rounded-lg">Delete</button>
-      ) : (
-        <></>
-      )}
+    <div onClick={handleDivClick} style={{ border: '1px solid black', padding: '10px', margin: '10px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between' }}>
+      <div>
+        <h3>{task.title}</h3>
+        {session ? (
+          <button onClick={handleDelete} className="p-2 bg-red-500 text-white rounded-lg">Delete</button>
+        ) : (
+          <></>
+        )}
+      </div>
+      {column === 'Done' ? 
+        (
+          <div>
+            <a>Grade: <strong>{task.grade}</strong>/10</a>
+          </div>
+        ) :
+        (<></>)
+      }
+      
     </div>
   );
 }

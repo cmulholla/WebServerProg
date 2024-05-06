@@ -31,10 +31,10 @@ export default function AddTask() {
     const [taskID, setTaskID] = useState<string | string[] | undefined>(router.query.taskID);
 
     // the ticket contains the board_ticket_data for the current task
-    const [ticket, setTicket] = useState<Ticket>({ ticket_id: 0, title: '', description: '', status_column: '', assignee_id: '', board_id: 0, to_generate: false })
+    const [ticket, setTicket] = useState<Ticket>({ ticket_id: 0, title: '', description: '', status_column: '', assignee_id: '', board_id: 0, to_generate: false, grade: 0 })
   
     // the board contains the board ID and the board title
-    const [board, setBoard] = useState<{ id: number, name: string }>({ id: 0, name: '' })
+    const [board, setBoard] = useState<{ id: number, name: string, proficiency: number }>({ id: 0, name: '', proficiency: 0 })
   
     // the board members contain all of the board members ids for all of the boards
     const [board_members, setBoardMembers] = useState<BoardMember[]>([])
@@ -140,12 +140,11 @@ export default function AddTask() {
     }, [supabase, session, user, router, boardId]);
 
     const onSubmit = async (data: any) => {
-      // update the assignee and the status column of the ticket
-      const { assignee_id, status_column } = data;
+      let { description } = data;
 
       const { data: tasks, error } = await supabase
         .from('board_ticket_data')
-        .update({assignee_id: assignee_id, status_column: status_column, to_generate: false})
+        .update({status_column: "Done", description: ticket.description + "\n<h2>User input:</h2>\n" + description, to_generate: true})
         .eq('ticket_id', parseInt(taskID as string))
         .eq('board_id', parseInt(boardId as string))
         .single()
@@ -154,9 +153,9 @@ export default function AddTask() {
     return (
       <>
         <Head>
-            <title>Add Task</title>
+            <title>Assignment</title>
         </Head>
-        <Header session={session} supabase={supabase} boardName={board.name} board_members={board_users}/>
+        <Header session={session} supabase={supabase} boardName={board.name + " - proficiency: " + board.proficiency} board_members={board_users}/>
         {/* This is the ticket information, including description. You can update the column from here too. */}
         <div>
           <h1 style={{ marginLeft: '20px' }}>{ticket.title}</h1>
@@ -166,28 +165,10 @@ export default function AddTask() {
                             if (event == null) {
                                 return;
                             }
-                            event.preventDefault();
                             onSubmit(data);
                         })}>
-              <label style={{ marginRight: '10px' }}>
-                Assignee:
-              </label>
-              <select {...register('assignee_id')} style={{ display: 'block' }} defaultValue={UserData.find((usern) => usern.user_id === ticket.assignee_id)?.user_id}>
-                {board_users.map((user) => (
-                  <option value={user.user_id}>{user.username}</option>
-                ))
-                }
-              </select>
-              <label style={{marginRight: '10px' }}>
-                Status:
-              </label>
-              <select {...register('status_column')} defaultValue={ticket.status_column} style={{ display: 'block', marginBottom: '20px' }}>
-                <option value='To Do'>To Do</option>
-                <option value='In Progress'>In Progress</option>
-                <option value='In Review'>In Review</option>
-                <option value='Done'>Done</option>
-              </select>
-              <button type="submit" value="Submit" style={{ display: 'block', minWidth: '150px' }} className='p-2 bg-blue-500 text-white rounded-lg'>Update Ticket</button>
+              <textarea {...register('description')} style={{ width: '95%', height: '200px', border: '1px solid black', padding: '10px' }} placeholder='Type completed assignment details here for AI grading' />
+              <button type="submit" value="Submit" style={{ display: 'block', minWidth: '150px' }} className='p-2 bg-blue-500 text-white rounded-lg'>Complete Assignment</button>
             </form>
           </div>
         </div>

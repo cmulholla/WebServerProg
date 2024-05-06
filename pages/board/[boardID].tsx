@@ -30,7 +30,7 @@ export default function BoardPage() {
   const [boardId, setBoardId] = useState<string>();
 
   // the board contains the board ID and the board title
-  const [board, setBoard] = useState<{ id: number, name: string }>({ id: 0, name: '' })
+  const [board, setBoard] = useState<{ id: number, name: string, proficiency: number }>({ id: 0, name: '', proficiency: 0 })
 
   // the board members contain all of the board members ids for all of the boards
   const [board_members, setBoardMembers] = useState<BoardMember[]>([])
@@ -201,36 +201,24 @@ export default function BoardPage() {
   return (
     <>
       <div style={{ display: 'flex', flexDirection: 'column', height: '100vh'}}>
-        <Header session={session} supabase={supabase} boardName={board.name} board_id={parseInt(boardId as string)} board_members={board_users}/>
+        <Header session={session} supabase={supabase} boardName={board.name + " - proficiency: " + board.proficiency} board_id={parseInt(boardId as string)} board_members={board_users}/>
         <Head>
-          
           <meta name="description" content={board.name} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Grid container direction="row" spacing={"1.5%"} alignItems="stretch" style={{ height: '100vh', padding: '1.5%'}}>
-          <Grid item xs={3}>
+          <Grid item xs={6}>
             <Paper sx={{ p: 2, bgcolor: 'rgba(0, 0, 0, 0.1)', border: '1px solid rgba(0, 0, 0, 0.2)', height: '100%' }}>
               <Column boardId={parseInt(boardId as string)} columnName={'To Do'} session={session} supabase={supabase} board_members={board_users} />
             </Paper>
           </Grid>
-          <Grid item xs={3}>
-            <Paper sx={{ p: 2, bgcolor: 'rgba(0, 0, 0, 0.1)', border: '1px solid rgba(0, 0, 0, 0.2)', height: '100%' }}>
-              <Column boardId={parseInt(boardId as string)} columnName={'In Progress'} session={session} supabase={supabase} board_members={board_users} />
-            </Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper sx={{ p: 2, bgcolor: 'rgba(0, 0, 0, 0.1)', border: '1px solid rgba(0, 0, 0, 0.2)', height: '100%' }}>
-              <Column boardId={parseInt(boardId as string)} columnName={'In Review'} session={session} supabase={supabase} board_members={board_users} />
-            </Paper>
-          </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={6}>
             <Paper sx={{ p: 2, bgcolor: 'rgba(0, 0, 0, 0.1)', border: '1px solid rgba(0, 0, 0, 0.2)', height: '100%' }}>
               <Column boardId={parseInt(boardId as string)} columnName={'Done'} session={session} supabase={supabase} board_members={board_users} />
             </Paper>
           </Grid>
         </Grid>
-        
       </div>
     </>
   )

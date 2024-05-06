@@ -57,18 +57,11 @@ export default function Column({ boardId, columnName, session, supabase, board_m
   return (
     <div>
       <Stack direction="row" spacing={1} justifyContent="space-between">
-        <h6>{columnName + " "}</h6>
-        {columnName === 'To Do' ? (
-          <Button variant="outlined" color="primary" size="small" style={{position: 'relative', top: '-5px', visibility: user ? 'visible' : 'hidden'}}
-                  onClick={() => router.push(`/board/${boardId}/add-task`)}>
-            Add Task
-          </Button>
-        ) : (
-          <Button variant="outlined" color="primary" size="small" style={{position: 'relative', top: '-5px', visibility: 'hidden'}}
-                  onClick={() => router.push(`/board/${boardId}/add-task`)}>
-            Add Task
-          </Button>
-        )}
+        <h6>{columnName === 'To Do' ? (<>{"Assignments to Complete "}</>) : (<>{"Completed Assignments "}</>)}</h6>
+        <Button variant="outlined" color="primary" size="small" style={{position: 'relative', top: '-5px', visibility: 'hidden'}}
+                onClick={() => router.push(`/board/${boardId}/add-task`)}>
+          Add Task
+        </Button>
       </Stack>
       <hr />
       <Stack spacing={2}>
@@ -77,7 +70,7 @@ export default function Column({ boardId, columnName, session, supabase, board_m
             <Grid container>
               {tasks.map(task => (
                 <Grid item xs={12} key={task.ticket_id}>
-                  <Task task={task} session={session} supabase={supabase} board_members={board_members} />
+                  <Task task={task} session={session} supabase={supabase} board_members={board_members} column={columnName} />
                 </Grid>
               ))}
             </Grid>

@@ -26,7 +26,7 @@ export default function AddTask() {
     const [boardId, setBoardId] = useState<string | string[] | undefined>(router.query.boardID);
   
     // the board contains the board ID and the board title
-    const [board, setBoard] = useState<{ id: number, name: string }>({ id: 0, name: '' })
+    const [board, setBoard] = useState<{ id: number, name: string, proficiency: number }>({ id: 0, name: '', proficiency: 0 })
   
     // the board members contain all of the board members ids for all of the boards
     const [board_members, setBoardMembers] = useState<BoardMember[]>([])
@@ -135,7 +135,7 @@ export default function AddTask() {
         <Head>
             <title>Add Task</title>
         </Head>
-        <Header session={session} supabase={supabase} boardName={board.name} board_members={board_users}/>
+        <Header session={session} supabase={supabase} boardName={board.name + " - proficiency: " + board.proficiency} board_members={board_users}/>
         <div
             className="w-full h-full flex flex-col justify-center items-center p-4"
             style={{ minWidth: 250, margin: 'auto' }}

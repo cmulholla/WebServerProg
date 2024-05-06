@@ -1,0 +1,376 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts%
+
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{comment}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{New trends in frontend and backend technologies \\}
+
+
+\author{\IEEEauthorblockN{Connor Mulholland}
+\IEEEauthorblockA{\textit{Department of Mathematics and Computer Science} \\
+\textit{Lawrence Technological University}\\
+Southfield, Michigan, USA \\
+cmulholla@ltu.edu}
+}
+
+\begin{comment}
+New trends: languages, techniques, environments, tooling and developer experience, etc.
+
+- Abstract/Introduction
+- Problem Statement & Motivation
+- Background
+- Literature Survey/Current Approaches & Research
+- Proposed Methodology/Approach/Solution
+- Conclusions and Summary
+
+
+Abstract/Introduction: 100 to 150 words
+ - Going over what the paper is about
+ - Explaining the old and new technologies that are being used and why it's important to keep up on these new technologies rather than sticking with the old ones
+ - Giving a few examples of the new technologies that are being used and how they're better than the older ones
+
+Problem Statement & Motivation:
+ - There's lots of frontend and backend technologies, but not a lot of researched lists of the new ones. 
+ - This paper will go over the new technologies that are being used and why they're better than the old ones - and in what ways
+
+Background:
+  - Going over each of the old technologies (x - 2010) and how they were good for their time
+
+Literature Survey/Current Approaches & Research:
+  - https://mspace.lib.umanitoba.ca/server/api/core/bitstreams/acd800a8-ce13-4020-8e48-048de4a8f98c/content
+    - 2006 paper, more historical context
+	- taxonomies of front and back end technologies
+    - LVS, CD, Microsoft's NLB, Akamai, IBM's ND, LB, and AWS Alteon
+      - These are the examples of software that was used in the paper which was used for their research, which are now very outdated
+
+Methodology (The research):
+  - Giving examples of the new technologies that are being used and how they're better than the old ones
+
+  - bun:
+    - https://trepo.tuni.fi/bitstream/handle/10024/149672/AhmodMdFeroj.pdf?sequence=2
+	  - "Based on these results, it can be said that Bun performs better than Node.js in terms of network requests and the execution of independent scripts."
+	  - Their results line up fairly well with Buns own findings (4x faster), although not to their extent (1.88x faster).
+
+
+Front-end Technologies:
+1. HTML (1993)
+2. CSS (1996)
+3. JavaScript (1995)
+4. jQuery (2006)
+5. AngularJS (2010)
+6. ReactJS (2013)
+7. VueJS (2014)
+8. Svelte (2016)
+9. Ember.js (2011)
+10. Backbone.js (2010)
+11. Bootstrap (2011)
+12. Semantic UI (2013)
+13. Material-UI (2014)
+14. Tailwind CSS (2017)
+15. TypeScript (2012)
+
+Back-end Technologies:
+1. PHP (1995)
+2. Java (1995)
+3. C# (.NET) (2000)
+4. Python (1991)
+5. Ruby (1995)
+6. Ruby on Rails (2005)
+7. Django (2005)
+8. Flask (2010)
+9. Node.js (2009)
+10. Express.js (2010)
+11. Go (2009)
+12. Rust (2010)
+13. Elixir (2011)
+14. ASP.NET (2002)
+15. Spring Boot (2002)
+
+Newer Back-end Technologies:
+1. Deno (2018): A secure runtime for JavaScript and TypeScript, created by the original developer of Node.js.
+2. Fastify (2017): A web framework highly focused on providing the best developer experience with the least overhead and a powerful plugin architecture.
+3. NestJS (2017): A framework for building efficient, scalable Node.js server-side applications. It uses progressive JavaScript, is built with TypeScript, and combines elements of OOP, FP, and FRP.
+4. AdonisJS (2015): A Node.js MVC framework that runs on every major OS. It offers a stable ecosystem to write server-side web applications so you can focus on business needs over finalizing which package to choose or not.
+5. Hapi.js (2011): A rich framework for building applications and services. It enables developers to focus on writing reusable application logic instead of spending time building infrastructure.
+6. Koa.js (2013): A new web framework designed by the team behind Express, which aims to be a smaller, more expressive, and more robust foundation for web applications and APIs.
+7. Strapi (2015): An open-source headless CMS front-end developers love. It's more than a Node.js Framework and more than a Headless CMS.
+8. Bun (2021): A simple, fast, and reliable SQL database client for Go. It supports PostgreSQL, MySQL, and SQLite.
+
+ - go over most of these technologies, starting with front-end then back-end.
+ - go over what each technology replaces, or is trying to replace, and how it performs better than the old technology
+ - only go over the most popular technologies in depth, not all of them, and only the newer ones (2010+)
+ - go over the less popular ones in a smaller section, but still go over them
+
+Conclusions and Summary:
+  - Summarizing the key aspects of the paper
+  - Future work with including upcoming technologies, AI, etc.
+
+
+
+\end{comment}
+
+\maketitle
+
+%%%%%%%%%%%%% Abstract
+\begin{abstract}
+Web server technologies have evolved significantly post-2010, reshaping front-end and back-end development paradigms. This paper explores recent trends, highlighting shifts towards efficiency and scalability. New front-end frameworks like ReactJS, VueJS, and Svelte offer enhanced performance and developer productivity. On the back end, technologies like Deno, Fastify, and NestJS challenge older platforms by prioritizing security and ease of use.
+
+We analyze how these advancements address limitations of legacy systems, contributing to web server ecosystem evolution. Developers benefit from informed adoption of modern tools, optimizing workflow and user experiences.
+
+This study emphasizes transitioning to newer technologies and showcases recent front-end and back-end advancements. Subsequent sections delve into background, current approaches, and methodologies related to these evolving web server technologies.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Front-end, back-end, web server, technologies, frameworks.
+\end{IEEEkeywords}
+
+%%%%%%%%%%%%% Problem Statement & Motivation
+\section{Problem Statement \& Motivation}
+
+The field of web development has witnessed a proliferation of frontend and backend technologies in recent years. Despite this abundance, there is a notable gap in comprehensive, researched lists of newer technologies introduced after 2010. Existing studies often focus on historical technologies or popular frameworks, overlooking emerging solutions that may offer significant advancements.
+
+This paper addresses the need for a systematic exploration of modern web server technologies. By compiling and analyzing recent advancements, we aim to provide a comprehensive understanding of why these new technologies are superior to their predecessors. Specifically, we will highlight the unique features, performance improvements, and developer benefits offered by these cutting-edge tools.
+
+Our motivation is to equip developers, researchers, and industry professionals with insights into the evolving landscape of web server technologies. Understanding the strengths and weaknesses of new technologies is crucial for making informed decisions in software development and staying ahead in a rapidly changing industry.
+
+%%%%%%%%%%%%% Background
+\section{Background}
+
+In this section, we provide an overview of notable web server technologies that were prominent before 2006, discussing their characteristics and contributions to the field of web development.
+
+\subsection{Front-end Technologies}
+
+\begin{itemize}
+    \item \textbf{HTML (1993)}: Hypertext Markup Language revolutionized content structuring on the web, enabling the creation of static web pages.
+    
+    \item \textbf{CSS (1996)}: Cascading Style Sheets introduced the concept of separating content from presentation, allowing for sophisticated visual designs.
+    
+    \item \textbf{JavaScript (1995)}: The introduction of client-side scripting with JavaScript empowered dynamic web content and interactivity.
+    
+    \item \textbf{jQuery (2006)}: jQuery simplified DOM manipulation and AJAX requests, enhancing cross-browser compatibility.
+
+\end{itemize}
+
+\subsection{Back-end Technologies}
+
+\begin{itemize}
+    \item \textbf{PHP (1995)}: PHP revolutionized server-side scripting for dynamic web content generation.
+    
+    \item \textbf{Java (1995)}: Java provided robustness and scalability for enterprise-level web applications.
+    
+    \item \textbf{C\# (.NET) (2000)}: C\# with .NET Framework offered a powerful ecosystem for building scalable web services and applications.
+    
+    \item \textbf{Python (1991)}: Python became popular for its simplicity and readability, fostering rapid development of web applications.
+    
+    \item \textbf{Ruby (1995)}: Ruby on Rails (2005) introduced convention over configuration, accelerating web application development.
+    
+    \item \textbf{Django (2005)}: Django streamlined web development with its batteries-included framework, promoting best practices.
+    
+    \item \textbf{ASP.NET (2002)}: ASP.NET offered a comprehensive framework for building enterprise-level web applications.
+    
+    \item \textbf{Spring Boot (2002)}: Spring Boot streamlined Java-based web development with convention over configuration.
+
+\end{itemize}
+
+This retrospective analysis provides insights into the evolution of web server technologies, showcasing the foundational tools that laid the groundwork for modern advancements in frontend and backend development.
+
+
+
+%%%%%%%%%%%%% Literature Survey
+\section{Literature Survey}
+
+In a 2006 paper by Ganeshan \cite{oldTaxonomy}, a comparative evaluation of web server systems provided valuable insights into historical web server technologies. Note that this thesis was the only peer reviewed literature reguarding the taxonomy of web server systems that was found, and the author urges the reader to attempt to find more recent literature on the subject. The study presented taxonomies of front-end and back-end technologies, highlighting the characteristics and performance of outdated software services:
+
+\begin{itemize}
+    \item \textbf{LVS (Linux Virtual Server)}: A software-based load balancing solution for Linux systems, distributing incoming network traffic across multiple servers to enhance scalability and reliability.
+    
+    \item \textbf{CD (Content Delivery Network)}: A network of distributed servers that deliver web content to users based on their geographical location, reducing latency and improving website performance.
+    
+    \item \textbf{Microsoft's NLB (Network Load Balancing)}: A feature in Microsoft Windows Server that distributes incoming network traffic across multiple servers to improve resource utilization and availability.
+    
+    \item \textbf{Akamai}: A prominent content delivery network (CDN) provider that optimizes content delivery and web performance by caching data at edge servers located close to end-users.
+    
+    \item \textbf{IBM's ND (Network Dispatcher) and LB (Load Balancer)}: Network Dispatcher and Load Balancer solutions from IBM designed to manage and optimize traffic distribution in enterprise environments.
+    
+    \item \textbf{AWS Alteon}: An early load balancing solution offered by Alteon (acquired by Radware) for Amazon Web Services (AWS), providing traffic management and optimization capabilities for cloud-based applications.
+\end{itemize}
+
+This historical context underscores the evolution of web server technologies and the impact of legacy solutions on modern web development practices. While these technologies were once prevalent, their relevance has diminished over time due to advancements in hardware, software, and networking.
+
+Moving forward, our research will build upon this foundation by examining contemporary web server technologies introduced after 2010, focusing on their comparative advantages and innovations.
+
+
+
+%%%%%%%%%%%%% Literature Survey
+\section{Technology Overview \& Methodology}
+
+In this section, we explore recent advancements in web server technologies introduced after 2006, highlighting their capabilities and comparative advantages over legacy solutions.
+
+\subsection{Front-end Technologies}
+
+\begin{table}[ht]
+    \centering
+    \caption{Front-end Technologies Overview}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Technology} & \textbf{Release Year} & \textbf{Replaces} \\
+    \hline
+    ReactJS              & 2013                   & AngularJS, Backbone.js \\
+    VueJS                & 2014                   & AngularJS, Backbone.js \\
+    Svelte               & 2016                   & ReactJS, VueJS \\
+    Angular              & 2010                   & - \\
+    Ember.js             & 2011                   & - \\
+    Backbone.js          & 2010                   & - \\
+    Bootstrap            & 2011                   & - \\
+    Semantic UI          & 2013                   & - \\
+    Material-UI          & 2014                   & - \\
+    Tailwind CSS         & 2017                   & Bootstrap \\
+    TypeScript           & 2012                   & JavaScript \\
+    \hline
+    \end{tabular}
+    \end{table}
+
+\begin{itemize}
+    \item \textbf{ReactJS (2013)}:
+    ReactJS is a JavaScript library for building user interfaces, focusing on component-based development and efficient rendering of UI elements. It replaces traditional MVC frameworks like AngularJS (2010) and Backbone.js (2010). ReactJS introduces a virtual DOM for optimized rendering, facilitates reusable components, and enhances performance by minimizing DOM updates.
+    
+    \item \textbf{VueJS (2014)}:
+    VueJS is a progressive JavaScript framework for building interactive web interfaces, offering simplicity and flexibility. It replaces established frameworks like AngularJS (2010) and Backbone.js (2010). VueJS provides a lightweight alternative with a gentle learning curve, supports two-way data binding, and promotes efficient component-based development.
+    
+    \item \textbf{Svelte (2016)}:
+    Svelte is a modern JavaScript framework that compiles components into highly optimized vanilla JavaScript at build time. It can replace ReactJS (2013) and VueJS (2014) for certain use cases. Svelte eliminates the need for a virtual DOM, resulting in smaller bundle sizes, faster rendering, and improved runtime performance.
+    
+    \item \textbf{Angular (2010)}:
+    Angular is a comprehensive JavaScript framework for building complex applications, offering features like two-way data binding, dependency injection, and TypeScript integration.
+    
+    \item \textbf{Ember.js (2011)}:
+    Ember.js is a JavaScript framework for ambitious web developers, emphasizing convention over configuration and productivity.
+    
+    \item \textbf{Backbone.js (2010)}:
+    Backbone.js provides structure to web applications by offering models, views, collections, and event handling in JavaScript.
+    
+    \item \textbf{Bootstrap (2011)}:
+    Bootstrap is a popular CSS framework for building responsive and mobile-first websites, providing a grid system and pre-styled components.
+    
+    \item \textbf{Semantic UI (2013)}:
+    Semantic UI is a modern front-end framework emphasizing human-friendly HTML with intuitive syntax and components.
+    
+    \item \textbf{Material-UI (2014)}:
+    Material-UI is a React components library implementing Google's Material Design, offering pre-designed UI components.
+    
+    \item \textbf{Tailwind CSS (2017)}:
+    Tailwind CSS is a utility-first CSS framework for rapidly building custom designs without writing custom CSS.
+    
+    \item \textbf{TypeScript (2012)}:
+    TypeScript is a typed superset of JavaScript that compiles to plain JavaScript, providing static type checking and enhanced tooling support.
+\end{itemize}
+
+\subsection{Back-end Technologies}
+
+\begin{table}[ht]
+    \centering
+    \caption{Back-end Technologies Overview}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Technology} & \textbf{Release Year} & \textbf{Replaces} \\
+    \hline
+    Node.js    & 2009 & - \\
+    Express.js & 2010 & Node.js \\
+    Go         & 2009 & - \\
+    Rust       & 2010 & - \\
+    Elixir     & 2011 & - \\
+    AdonisJS   & 2015 & Express.js \\
+    Hapi.js    & 2011 & - \\
+    Koa.js     & 2013 & Express.js \\
+    Strapi     & 2015 & - \\
+    Bun        & 2021 & Node.js \\
+    \hline
+    \end{tabular}
+    \end{table}
+
+\begin{itemize}
+    \item \textbf{Node.js (2009)}:
+    Node.js is a runtime environment for executing JavaScript server-side, enabling non-blocking, event-driven I/O operations.
+    
+    \item \textbf{Express.js (2010)}:
+    Express.js is a minimalist web framework for Node.js, simplifying server-side development with its middleware architecture and routing capabilities.
+    
+    \item \textbf{Go (2009)}:
+    Go (or Golang) is a statically typed, compiled language designed for simplicity, efficiency, and concurrency. It offers built-in support for concurrent programming and scalable network applications.
+    
+    \item \textbf{Rust (2010)}:
+    Rust is a systems programming language known for its memory safety, performance, and concurrency features. It is suitable for developing high-performance and reliable server applications.
+    
+    \item \textbf{Elixir (2011)}:
+    Elixir is a functional, concurrent language built on the Erlang VM, emphasizing scalability, fault tolerance, and distributed systems.
+    
+    \item \textbf{AdonisJS (2015)}:
+    AdonisJS is a Node.js MVC framework that simplifies building server-side applications with a rich ecosystem of modules and conventions.
+    
+    \item \textbf{Hapi.js (2011)}:
+    Hapi.js is a powerful framework for building applications and services in Node.js, focusing on code reusability and extensibility.
+    
+    \item \textbf{Koa.js (2013)}:
+    Koa.js is a web framework designed by the creators of Express.js, offering a more modular and lightweight alternative with async/await support.
+    
+    \item \textbf{Strapi (2015)}:
+    Strapi is an open-source headless CMS (Content Management System) built on Node.js, providing a customizable API-centric content management solution.
+    
+    \item \textbf{Bun (2021)}:
+    Bun is a simple, fast, and reliable SQL database client for Go. It supports PostgreSQL, MySQL, and SQLite databases, offering performance benefits over traditional database clients.
+\end{itemize}
+
+\subsection{Summary}
+
+These new web server technologies introduced post-2006 demonstrate significant advancements in performance, scalability, and developer experience compared to their predecessors. By leveraging modern approaches and innovations, these frameworks and libraries address key limitations of older technologies, empowering developers to build robust and efficient web applications.
+
+%%%%%%%%%%%%% Conclusion
+\section{Conclusions and Summary}
+
+In this paper, we have examined the evolving landscape of web server technologies, focusing on advancements introduced after 2006 in both front-end and back-end development. We discussed how newer frameworks and libraries such as ReactJS, VueJS, Node.js, and Go have revolutionized web application development, offering enhanced performance, scalability, and developer productivity compared to their predecessors.
+
+The analysis of these technologies reveals a clear trend towards more efficient and flexible solutions, driven by the need for responsive and dynamic web experiences. Front-end frameworks like ReactJS and VueJS prioritize component-based architectures and virtual DOM rendering, while back-end technologies like Node.js and Go emphasize non-blocking I/O and concurrency.
+
+%%%%%%%%%%%%% Future Work
+\subsection{Future Work}
+
+For future work, there are several exciting avenues to explore in web server technologies and their applications. One promising direction is the integration of artificial intelligence (AI) into websites, enabling personalized user experiences through chatbots, recommendation systems, and predictive analytics. AI-driven optimizations can enhance content delivery and user engagement, leading to more adaptive and responsive web applications.
+
+Additionally, advancements in low-code platforms such as Wix and other web service providers are reshaping web development practices. Exploring the implications of these platforms on developer workflows and scalability could uncover new strategies for rapid prototyping and deployment.
+
+Further research could also focus on emerging technologies like WebAssembly and serverless architectures, which promise to redefine web application development paradigms. Understanding the impact of these technologies on performance, security, and scalability will be crucial for staying at the forefront of web server innovation.
+
+By embracing these advancements and conducting targeted research, developers can unlock new opportunities and push the boundaries of web development, ultimately delivering more sophisticated and user-centric web applications.
+
+
+
+%%%%%%%%%%%%% Bibliography
+\begin{thebibliography}{00}
+
+\bibitem{oldTaxonomy}
+Manikandaprabhu Ganeshan.
+\textit{A Comparative Evaluation of Web Server Systems: Taxonomy and Performance}.
+University of Manitoba, 2006.
+\url{mspace.lib.umanitoba.ca/server/api/core/bitstreams/acd800a8-ce13-4020-8e48-048de4a8f98c/content}.
+
+\bibitem{newPerformance}
+Md Feroj Ahmod and Faculty of Information Technology and Communication Sciences (ITC).
+\textit{JavaScript Runtime Performance Analysis: Node and Bun}.
+Master’s Thesis, Tampere University, June 2023.
+\url{trepo.tuni.fi/bitstream/handle/10024/149672/AhmodMdFeroj.pdf?sequence=2}.
+
+\end{thebibliography}
+\vspace{12pt}
+
+\end{document}

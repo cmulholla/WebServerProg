@@ -94,13 +94,13 @@ export default function Dashboard() {
         }
     }
 
-    const createBoard = async (boardText: string) => {
+    const createBoard = async (boardText: string, Proficiency: string) => {
         let boardName = boardText.trim()
         if (boardName.length) {
             // create the board in the boards db
             const { data: board, error } = await supabase
                 .from('boards')
-                .insert({ name: boardName })
+                .insert({ name: boardName, proficiency: parseInt(Proficiency)})
                 .select()
                 .single()
     
@@ -137,7 +137,7 @@ export default function Dashboard() {
         window.location.href = `/board/${boardId}`
     }
 
-    const onSubmit = (data: any) => createBoard(data.CreateBoard);
+    const onSubmit = (data: any) => createBoard(data.CreateBoard, data.Proficiency);
     const onJoin = (data: any) => joinBoard(data.JoinBoard);
     console.log(errors);
 
@@ -145,7 +145,7 @@ export default function Dashboard() {
         <>
             <Header session={session} supabase={supabase} />
             <Head>
-                <title>Scrum AI</title>
+                <title>Lang AI</title>
                 <meta name="description" content="Scrum AI Dashboard" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
@@ -156,43 +156,26 @@ export default function Dashboard() {
                     style={{ minWidth: 250, maxWidth: 600, margin: 'auto' }}
                 >
                     <form
-                        onSubmit={handleSubmit((data: any) => {
-                            if (event == null) {
-                                return;
-                            }
-                            event.preventDefault();
-                            onJoin(data);
-                        })}
-                        className="flex gap-2 my-2"
-                    >
-                        <input
-                            type="text"
-                            placeholder="Enter a board ID"
-                            {...register("JoinBoard", { required: false, valueAsNumber: true})}
-                            className="p-2 border-2 border-gray-400 rounded-lg"
-                        />
-                        <button
-                            type="submit"
-                            className="p-2 bg-blue-500 text-white rounded-lg"
-                        >
-                            Join Board
-                        </button>
-                    </form>
-                    <form
                         onSubmit={handleSubmit(onSubmit)}
                         className="flex gap-2 my-2"
                     >
                         <input
                             type="text"
-                            placeholder="Enter a new board name"
-                            {...register("CreateBoard", { required: false })}
+                            placeholder="Language Name"
+                            {...register("CreateBoard", { required: true })}
+                            className="p-2 border-2 border-gray-400 rounded-lg"
+                        />
+                        <input 
+                            type="number" 
+                            placeholder="Proficiency 0-10" 
+                            {...register("Proficiency", {required: true, max: 10, min: 0})}
                             className="p-2 border-2 border-gray-400 rounded-lg"
                         />
                         <button
                             type="submit"
                             className="p-2 bg-blue-500 text-white rounded-lg"
                         >
-                            Create Board
+                            Add Language
                         </button>
                     </form>
                     {boards.map((board) => {
@@ -204,13 +187,13 @@ export default function Dashboard() {
                                         onClick={() => viewBoard(board.id)}
                                         className="p-2 bg-blue-500 text-white rounded-lg"
                                     >
-                                        View Board
+                                        View Language
                                     </button>
                                     <button
                                         onClick={() => leaveBoard(board.id)}
                                         className="p-2 bg-red-500 text-white rounded-lg"
                                     >
-                                        Leave Board
+                                        Leave Language
                                     </button>
                                 </div>
                             );
